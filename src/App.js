@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   useEffect( () => {
     let mounted = true;
     async function getData() {
@@ -17,7 +16,7 @@ function App() {
     if (mounted)
       getData();
     return () => mounted = false;
-  }, {})
+  }, [])
   return (
     <div className="App">
       <header className="App-header">

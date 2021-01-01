@@ -65,7 +65,7 @@ function App() {
           </div>
         }
         <div className="donate">
-          <a href="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"><img width={130} src="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"></img></a>
+          <a href="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"><img alt="Donation Address QRCODE" width={130} src="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"></img></a>
           <div className="items">
             <h2>Donate to ticker.cash</h2>
             <p>bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8</p>

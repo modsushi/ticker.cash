@@ -57,6 +57,9 @@ function App() {
       <header className="App-header" style={{height:window.innerHeight}}>
         <img src='/bitcoin-cash-logos/rounded-version/bitcoin-cash-circle.png' className="App-logo" alt="logo" />
         {
+          !data['bitcoin-cash'] && <h1>Loading ...</h1>
+        }
+        {
           data && data['bitcoin-cash'] && <div>
             <p className="price"><NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['bitcoin-cash']['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
             <h2>Market Cap - <NumberFormat value={parseFloat(data['bitcoin-cash']['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>

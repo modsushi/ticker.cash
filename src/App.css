@@ -26,6 +26,9 @@
 .App-header {
   background-color: #FFF;
   min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,17 +72,7 @@
     transform: rotate(360deg);
   }
 }
-
-/*  .App-header {
-    width: 100%;
-  }
-}
-  @media (min-width:481px)  {
-    .App-header {
-      width: 90%;
-      margin: 0 auto;
-    } /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-  @media (min-width:641px)  {
+    @media (min-width:800px)  {
     .App-header {
       width: 80%;
       margin: 0 auto;

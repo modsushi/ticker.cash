@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" style={{height:window.innerHeight}}>
         <img src='/bitcoin-cash-logos/rounded-version/bitcoin-cash-circle.png' className="App-logo" alt="logo" />
         {
           data && data['bitcoin-cash'] && <div>

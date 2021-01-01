@@ -52,7 +52,9 @@
   color:#0AC18E;
 }
 .colored {
-  color: #0AC18E;
+  color: #fff;
+  display: inline;
+  padding: 0 10px;
 }
 
 .App-link {
@@ -67,3 +69,18 @@
     transform: rotate(360deg);
   }
 }
+
+/*  .App-header {
+    width: 100%;
+  }
+}
+  @media (min-width:481px)  {
+    .App-header {
+      width: 90%;
+      margin: 0 auto;
+    } /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+  @media (min-width:641px)  {
+    .App-header {
+      width: 80%;
+      margin: 0 auto;
+    } /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }

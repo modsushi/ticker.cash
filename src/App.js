@@ -61,7 +61,7 @@ function App() {
             <p className="price"><NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['bitcoin-cash']['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
             <h2>Market Cap - <NumberFormat value={parseFloat(data['bitcoin-cash']['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
             <h2>24Hr Vol - <NumberFormat value={parseFloat(data['bitcoin-cash']['usd_24h_vol']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
-            <h2>24Hr Change - {data['bitcoin-cash']['usd_24h_change']}</h2>
+            <h2>24Hr Change - <Colored value={data['bitcoin-cash']['usd_24h_change']}/></h2>
           </div>
         }
         <div className="donate">
@@ -74,6 +74,12 @@ function App() {
       </header>
     </div>
   );
+}
+
+function Colored(props) {
+  let value = parseFloat(props.value.toFixed(2));
+  let color = (value < 0 ) ? '#f4133c' : '#3cf413';
+  return <div className='colored' style={{backgroundColor:color}}>{value}%</div>
 }
 
 export default App;

@@ -33,7 +33,24 @@
   font-size: calc(10px + 2vmin);
   color: #0F1820;
 }
-
+.donate {
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  border: 3px dashed #0AC18E;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+.donate .items {
+  font-size:0.6em;
+  display: block;
+}
+.donate img {
+  width:100px;
+}
+.donate h2 {
+  color:#0AC18E;
+}
 .colored {
   color: #0AC18E;
 }

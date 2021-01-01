@@ -64,6 +64,13 @@ function App() {
             <h2>24Hr Change - {data['bitcoin-cash']['usd_24h_change']}</h2>
           </div>
         }
+        <div className="donate">
+          <a href="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"><img width={130} src="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"></img></a>
+          <div className="items">
+            <h2>Donate to ticker.cash</h2>
+            <p>bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8</p>
+          </div>
+        </div>
       </header>
     </div>
   );

@@ -12,7 +12,17 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.price {
+  background-color:#222;
+  color: #fff;
+  display: inline-flex;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 30px auto 0 auto;
+}
+.price span {
+  padding: 5px 20px;
+}
 .App-header {
   background-color: #FFF;
   min-height: 100vh;

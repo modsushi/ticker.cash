@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import NumberFormat from 'react-number-format';
+import { PayButton } from '@paybutton/react'
 import './App.css';
 
 const subscribeMsg = {
@@ -11,6 +12,20 @@ const subscribeMsg = {
       "name": "ticker"
     }
   };
+
+  const to = 'bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8'
+  const amount = 2
+  const currency = 'USD'
+  const text = 'Donate'
+  const hoverText = 'Donate $2 to Ticker'
+  const theme = {
+    palette: {
+      primary: '#22c08f',
+      secondary: '#FFFFFF',
+      tertiary: '#333333'
+    }
+  }
+  const onSuccess = ()=>{}
 
 function App() {
   const [data, setData] = useState({});
@@ -55,25 +70,31 @@ function App() {
   return (
     <div className="App">
       <header className="App-header" style={{height:window.innerHeight}}>
+        <div class="currency-selector">
+          <span class="currency-label">BCH</span> <span class="arrow"></span>
+        </div>
         <img src='/bitcoin-cash-logos/rounded-version/bitcoin-cash-circle.png' className="App-logo" alt="logo" />
         {
           !data['bitcoin-cash'] && <h1>Loading ...</h1>
         }
         {
-          data && data['bitcoin-cash'] && <div>
-            <p className="price"><NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['bitcoin-cash']['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
-            <h2>Market Cap - <NumberFormat value={parseFloat(data['bitcoin-cash']['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
-            <h2>24Hr Vol - <NumberFormat value={parseFloat(data['bitcoin-cash']['usd_24h_vol']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
-            <h2>24Hr Change - <Colored value={data['bitcoin-cash']['usd_24h_change']}/></h2>
+          data && data['bitcoin-cash'] && <div class="content">
+            <h1 className="price"><span class="label-large">BCH</span> <NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['bitcoin-cash']['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h1>
+            <h2><span class="label">Market Cap</span><NumberFormat value={parseFloat(data['bitcoin-cash']['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
+            <h2><span class="label">24Hr Vol</span><NumberFormat value={parseFloat(data['bitcoin-cash']['usd_24h_vol']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
+            <h2><span class="label">24Hr Change</span><Colored value={data['bitcoin-cash']['usd_24h_change']}/></h2>
           </div>
         }
-        <div className="donate">
-          <a href="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"><img alt="Donation Address QRCODE" width={130} src="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8"></img></a>
-          <div className="items">
-            <h2>Donate to ticker.cash</h2>
-            <p>bitcoincash:qrelheuk6vlvq8ajg2ur3f4geh5tghqf5yxlarmkp8</p>
-          </div>
-        </div>
+        
+        <PayButton
+    to={to}
+    amount={amount}
+    currency={currency}
+    text={text}
+    hoverText={hoverText}
+    theme={theme}
+    onSuccess={onSuccess}
+  />
       </header>
     </div>
   );

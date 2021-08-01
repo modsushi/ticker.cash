@@ -4,7 +4,7 @@ body{
 }
 .App {
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
 
 }
 
@@ -23,7 +23,7 @@ body{
   /*background-color:#222;*/
   color: #222;
   display: flex;
-  font-size: 2em;
+  font-size: 1.5em;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -46,7 +46,7 @@ body{
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: #0F1820;
-  max-width: 400px;
+  max-width: 600px;
   border-radius: 32px;
   border: 12px solid #ececec;
   padding: 0 3rem;
@@ -66,7 +66,21 @@ flex-wrap: nowrap;
 justify-content: space-between;
 text-transform: uppercase;
 }
-
+.top-bar {
+  /* display: flex; */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;  
+}
+.logo {
+  font-size: 1.5rem;
+  align-self:center;
+  color: #FFF;
+  padding:5px 10px;
+  background-color: rgb(121 121 121 / 70%);
+  display: inline-block;
+  border-radius: 5px;
+}
 h2 .colored{
   border-radius: 2px;
 }

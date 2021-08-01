@@ -3,10 +3,20 @@ import NumberFormat from 'react-number-format';
 import { PayButton } from '@paybutton/react'
 import './App.css';
 
+const cryptoFamous = {
+  bitcoin: 'BTC/USD',
+  'bitcoin-cash':'BCH/USD',
+  ethereum: 'ETH/USD',
+  litecoin: 'LTC/USD' 
+};
+
 const subscribeMsg = {
     "event": "subscribe",
     "pair": [
-      "BCH/USD"
+      "BCH/USD",
+      "BTC/USD",
+      "ETH/USD",
+      "LTC/USD",
     ],
     "subscription": {
       "name": "ticker"
@@ -34,7 +44,7 @@ function App() {
   useEffect( () => {
     let mounted = true;
     async function getData() {
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true');
+      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash,bitcoin,ethereum,litecoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true');
       if (response.ok) {
         let data = await response.json();
         setData(data);
@@ -59,7 +69,9 @@ function App() {
       if (message.event)
         return;
       if (message.length && message[2] && message[2] === 'ticker')
-        setRtData(message[1]);
+        setRtData( prevState => ({
+          ...prevState, [message[3]]: message
+        }));
       return;
   };
     return () => {
@@ -69,21 +81,24 @@ function App() {
 
   return (
     <div className="App">
+      <div className="top-bar">
+      <h1 className='logo'>ticker.cash</h1>
+      </div>
       <header className="App-header" style={{height:window.innerHeight}}>
-        <div class="currency-selector">
-          <span class="currency-label">BCH</span> <span class="arrow"></span>
-        </div>
-        <img src='/bitcoin-cash-logos/rounded-version/bitcoin-cash-circle.png' className="App-logo" alt="logo" />
+        <div className="top-bar">
+          {/* <div className="currency-selector">
+            <span className="currency-label">BCH</span> <span class="arrow"></span>
+          </div> */}
+          {/* <img src='/bitcoin-cash-logos/rounded-version/bitcoin-cash-circle.png' className="App-logo" alt="logo" /> */}
+      </div> 
         {
           !data['bitcoin-cash'] && <h1>Loading ...</h1>
         }
         {
-          data && data['bitcoin-cash'] && <div class="content">
-            <h1 className="price"><span class="label-large">BCH</span> <NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['bitcoin-cash']['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h1>
-            <h2><span class="label">Market Cap</span><NumberFormat value={parseFloat(data['bitcoin-cash']['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
-            <h2><span class="label">24Hr Vol</span><NumberFormat value={parseFloat(data['bitcoin-cash']['usd_24h_vol']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
-            <h2><span class="label">24Hr Change</span><Colored value={data['bitcoin-cash']['usd_24h_change']}/></h2>
-          </div>
+         data && Object.keys(data).map( (item) => {
+            const namePair = item === 'bitcoin' ? 'XBT/USD' : cryptoFamous[item];
+            return  <CryptoRow staticData={data[item]} rtdata={rtdata} nameKey={item} namePair={namePair} key={item}/>;
+          })
         }
         
         <PayButton
@@ -98,6 +113,19 @@ function App() {
       </header>
     </div>
   );
+}
+
+const CryptoRow = (props) => {
+  const data = props.staticData || null;
+  const rtdata = props.rtdata.hasOwnProperty(props.namePair) ? props.rtdata[props.namePair][1] : {};
+  if (!data) 
+    return null;
+  return (<div className="content">
+  <h1 className="price"><span classname="label-large">{props.namePair.split('/')[0]}</span> <NumberFormat value={parseFloat(rtdata.b ? rtdata.b[0] : data['usd']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h1>
+  <h2><span className="label">Market Cap</span><NumberFormat value={parseFloat(data['usd_market_cap']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
+  <h2><span className="label">24Hr Vol</span><NumberFormat value={parseFloat(data['usd_24h_vol']).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h2>
+  <h2><span className="label">24Hr Change</span><Colored value={data['usd_24h_change']}/></h2>
+</div>)
 }
 
 function Colored(props) {
